@@ -1,11 +1,14 @@
 package com.example.miwok;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.android.material.tabs.TabLayout;
 
 import org.w3c.dom.Text;
 
@@ -15,38 +18,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView numbers = (TextView) findViewById(R.id.numbers);
-        final TextView colors = (TextView) findViewById(R.id.colors);
-        TextView family = (TextView) findViewById(R.id.family);
-        TextView phrases = (TextView) findViewById(R.id.phrases);
-        numbers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Numbers.class);
-                startActivity(intent);
-            }
-        });
-        colors.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Colors.class);
-                startActivity(intent);
-            }
-        });
-        family.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Family.class);
-                startActivity(intent);
-            }
-        });
-        phrases.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Phrases.class);
-                startActivity(intent);
-            }
-        });
+        ViewPager viewPager=(ViewPager) findViewById(R.id.viewpager);
+        CategoryAdapter adapter=new CategoryAdapter(getSupportFragmentManager(),this);
+        viewPager.setAdapter(adapter);
+        TabLayout tabLayout=(TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
 }
